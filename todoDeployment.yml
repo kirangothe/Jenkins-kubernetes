@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: todo-deployment
+
+  labels:
+
+    app: todo-app
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      app: todo-app
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: todo-app
+
+    spec:
+
+      containers:
+
+      - name: todo-app
+
+        image: kirangothe/reactdjangotodo:latest
+
+        ports:
+
+        - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-service
+spec:
+  type: NodePort
+  selector:
+    app: todo-app
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 80
+      targetPort: 8000
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+      nodePort: 30007
