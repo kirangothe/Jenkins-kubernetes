@@ -11,7 +11,7 @@ pipeline {
     
     stage('Checkout Source') {
       steps {
-       git branch: 'main', url: 'https://github.com/kirangothe/Jenkins-kubernetes.git'
+       git branch: 'main', url: 'https://github.com/kirangothe/nodeapp_test.git'
       }
     }
 
