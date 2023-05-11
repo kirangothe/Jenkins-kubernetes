@@ -1,12 +1,4 @@
-pipeline {
-  
-  stage('Install Docker') {
-  steps {
-    sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
-    sh 'sh get-docker.sh'
-    sh 'sudo usermod -aG docker $USER'
-  }
-}
+pipeline {  
 
   environment {
     dockerimagename = "kirangothe/nodeapp"
@@ -15,7 +7,15 @@ pipeline {
 
   agent any
 
-  stages {
+  stages {    
+    
+  stage('Install Docker') {
+      steps {
+        sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
+        sh 'sh get-docker.sh'
+        sh 'sudo usermod -aG docker $USER'
+      }
+    }
 
     stage('Checkout Source') {
       steps {
